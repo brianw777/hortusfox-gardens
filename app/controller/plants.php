@@ -122,6 +122,30 @@ class PlantsController extends BaseController {
 	}
 
 	/**
+	 * Handles URL: /plants/location/{id}/weeded
+	 * 
+	 * @param Asatru\Controller\ControllerArg $request
+	 * @return Asatru\View\RedirectHandler
+	 */
+	public function set_plants_weeded($request)
+	{
+		try {
+			$user = UserModel::getAuthUser();
+
+			$location = $request->arg('id');
+
+			PlantsModel::updateLastWeeded($location);
+
+			FlashMessage::setMsg('success', __('app.all_plants_weeded'));
+
+			return redirect('/plants/location/' . $location);
+		} catch (\Exception $e) {
+			FlashMessage::setMsg('error', $e->getMessage());
+			return back();
+		}
+	}
+
+	/**
 	 * Handles URL: /plants/details/{id}
 	 * 
 	 * @param Asatru\Controller\ControllerArg $request

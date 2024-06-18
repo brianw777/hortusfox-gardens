@@ -18,6 +18,7 @@ class PlantsModel extends \Asatru\Database\Model {
         'last_watered',
         'last_repotted',
         'last_fertilised',
+        'last_weeded',
         'health_state',
         'perennial',
         'annual',
@@ -547,6 +548,20 @@ class PlantsModel extends \Asatru\Database\Model {
     }
 
     /**
+     * @param $location
+     * @return void
+     * @throws \Exception
+     */
+    public static function updateLastWeeded($location)
+    {
+        try {
+            static::raw('UPDATE `' . self::tableName() . '` SET last_weeded = CURRENT_TIMESTAMP WHERE location = ?', [$location]);
+        } catch (\Exception $e) {
+            throw $e;
+        }
+    }
+
+    /**
      * @param $plantId
      * @return void
      * @throws \Exception
@@ -742,8 +757,8 @@ class PlantsModel extends \Asatru\Database\Model {
             copy(public_path() . '/img/' . $source->get('photo'), public_path() . '/img/' . $target_thumb_name);
             copy(public_path() . '/img/' . str_replace('_thumb', '', $source->get('photo')), public_path() . '/img/' . $target_original_name);
 
-            static::raw('INSERT INTO `' . self::tableName() . '` (name, scientific_name, knowledge_link, tags, location, photo, last_watered, last_repotted, last_fertilised, perennial, cutting_month, date_of_purchase, humidity, light_level, health_state, notes, last_edited_user, last_edited_date, clone_num) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
-                $source->get('name'), $source->get('scientific_name'), $source->get('knowledge_link'), $updated_tags, $source->get('location'), $target_thumb_name, $source->get('last_watered'), $source->get('last_repotted'), $source->get('last_fertilised'), $source->get('perennial'), $source->get('cutting_month'), $source->get('date_of_purchase'), $source->get('humidity'), $source->get('light_level'), $source->get('health_state'), $source->get('notes'), $user->get('id'), date('Y-m-d H:i:s'), static::getNameCount($source->get('name'))
+            static::raw('INSERT INTO `' . self::tableName() . '` (name, scientific_name, knowledge_link, tags, location, photo, last_watered, last_repotted, last_fertilised, last_weeded, perennial, cutting_month, date_of_purchase, humidity, light_level, health_state, notes, last_edited_user, last_edited_date, clone_num) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+                $source->get('name'), $source->get('scientific_name'), $source->get('knowledge_link'), $updated_tags, $source->get('location'), $target_thumb_name, $source->get('last_watered'), $source->get('last_repotted'), $source->get('last_fertilised'), $source->get('last_weeded'), $source->get('perennial'), $source->get('cutting_month'), $source->get('date_of_purchase'), $source->get('humidity'), $source->get('light_level'), $source->get('health_state'), $source->get('notes'), $user->get('id'), date('Y-m-d H:i:s'), static::getNameCount($source->get('name'))
             ]);
 
             $clone = static::raw('SELECT * FROM `' . self::tableName() . '` ORDER BY id DESC LIMIT 1')->first();
