@@ -18,6 +18,7 @@ class PlantsModel extends \Asatru\Database\Model {
         'last_watered',
         'last_repotted',
         'last_fertilised',
+	'last_weeded',
         'health_state',
         'perennial',
         'annual',
