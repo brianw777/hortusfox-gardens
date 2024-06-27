@@ -105,6 +105,22 @@
 				</tr>
 				@endif
 
+				@if (plant_attr('last_weeded'))
+				<tr>
+					<td><strong>{{ __('app.last_weeded') }}</strong></td>
+					<td>
+						@if ($plant->get('last_weeded'))
+							{{ date('Y-m-d', strtotime($plant->get('last_weeded'))) }}
+						@else
+							<span class="is-not-available">N/A</span>
+						@endif
+
+						<span class="float-right"><a href="javascript:void(0);" onclick="window.vue.showEditDate({{ $plant->get('id') }}, 'last_weeded', '{{ ($plant->get('last_weeded')) ? date('Y-m-d', strtotime($plant->get('last_weeded'))) : '' }}');"><i class="fas fa-edit is-color-darker"></i></a></span>
+					</td>
+					</td>
+				</tr>
+				@endif
+
 				@if (plant_attr('perennial'))
 				<tr>
 					<td><strong>{{ __('app.perennial') }}</strong></td>
