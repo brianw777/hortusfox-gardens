@@ -11,6 +11,9 @@
     @if (plant_attr('last_fertilised'))
 	<div class="is-inline-block is-action-button-margin"><a class="button is-chocolate" href="javascript:void(0);" onclick="window.vue.showPerformBulkUpdate('last_fertilised', '{{ __('app.bulk_set_fertilised') }}', '{{ __('app.set_fertilised') }}');">{{ __('app.set_fertilised') }}</a></div>
     @endif
+    @if (plant_attr('last_weeded'))
+	<div class="is-inline-block is-action-button-margin"><a class="button is-mint-green" href="javascript:void(0);" onclick="window.vue.showPerformBulkUpdate('last_weeded', '{{ __('app.bulk_set_weeded') }}', '{{ __('app.set_weeded') }}');">{{ __('app.set_fertilised') }}</a></div>
+    @endif
 	<div class="is-inline-block is-action-button-margin"><a class="button" href="javascript:void(0);" onclick="window.vue.bShowPlantBulkPrint = true;">{{ __('app.bulk_print_qr_codes') }}</a></div>
 	<div class="is-inline-block is-action-button-margin"><a class="is-default-link is-fixed-button-link is-fixed-margin-left-mobile" href="{{ url('/') }}">{{ __('app.back_to_dashboard') }}</a></div>
 </div>
