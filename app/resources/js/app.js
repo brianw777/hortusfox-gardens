@@ -64,6 +64,7 @@ window.vue = new Vue({
         confirmSetAllWatered: 'Are you sure you want to update the last watered date of all these plants?',
         confirmSetAllRepotted: 'Are you sure you want to update the last repotted date of all these plants?',
         confirmSetAllFertilised: 'Are you sure you want to update the last fertilised date of all these plants?',
+        confirmSetAllWeeded: 'Are you sure you want to update the last weeded date of all these plants?',
         confirmInventoryItemRemoval: 'Are you sure you want to remove this item?',
         confirmPlantAddHistory: 'Please confirm if you want to do this action.',
         confirmPlantRemoveHistory: 'Please confirm if you want to do this action.',
@@ -474,6 +475,15 @@ window.vue = new Vue({
         updateLastFertilised: function(id)
         {
             if (!confirm(window.vue.confirmSetAllFertilised)) {
+                return;
+            }
+
+            location.href = window.location.origin + '/plants/location/' + id + '/fertilise';
+        },
+
+        updateLastWeeded: function(id)
+        {
+            if (!confirm(window.vue.confirmSetAllWeeded)) {
                 return;
             }
 
