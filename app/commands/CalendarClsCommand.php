@@ -24,6 +24,11 @@ class CalendarClsCommand implements Asatru\Commands\Command {
             'color_background' => 'rgb(135, 195, 102)',
             'color_border' => 'rgb(205, 240, 167)'
         ],
+        'weed' => [
+            'name' => 'app.calendar_class_weed',
+            'color_background' => 'rgb(162, 228, 184)',
+            'color_border' => 'rgb(235, 258, 249)'
+        ],
         'purchase' => [
             'name' => 'app.calendar_class_purchase',
             'color_background' => 'rgb(230, 220, 90)',
